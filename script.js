@@ -1,5 +1,5 @@
 import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@4.2.0/dist/spin-wheel-esm.js';
-import * as easing from "../easing.js";
+import * as easing from "./easing.js";
 
 //template and spawn spinwheel
 var props = {
