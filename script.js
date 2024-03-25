@@ -52,12 +52,12 @@ function spinRandomly() {
 
   setTimeout(function () {
     if (Math.random() > 0.5) {
-      wheel.spinToItem(real_chosen_one, 1000, true, 2, 1, easing.bounceOut)
+      wheel.spinToItem(real_chosen_one, 1000, true, 2, 1, easingmode)
       setTimeout(function () { realSpin(real_chosen_one) }, 1500)
     } else {
       realSpin(chosen_one)
     }
-  }, 4000)
+  }, 5000)
 }
 
 function realSpin(val) {
