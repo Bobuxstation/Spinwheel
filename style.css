@@ -1,11 +1,12 @@
 body {
 	height: 100vh;
 	overflow: hidden;
+	background-image: url('https://source.unsplash.com/1600x900/?landscape');
 }
 
 * {
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 	font-family: Rubik;
 }
@@ -15,61 +16,67 @@ body {
 	float: left;
 	height: 100vh;
 	padding: 15px;
-	background: #e4f1aa;
-	border: #c0d26e solid 1px;
+	background: #2d2d2d;
+	border: 1px solid #3d3d3d;
 }
 
 .mainContent {
 	width: 80vw;
 	float: right;
 	height: 100vh;
-	padding: 15px;
-	background: #fbf8c4;
+	padding: 50px;
+	background: #1d1d1dee;
+    backdrop-filter: blur(10px);
 }
 
 textarea {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    background: #fbf8c4;
-    border: #c0d26e solid 1px;
-    border-radius: 5px;
-    resize: none;
-    padding: 15px;
-    font-size: 17.5px;
-    box-shadow: 0px 0px 9px 0px #1d1d1d26;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	background: #3d3d3d;
+	border: 1px solid #4d4d4d;
+	border-radius: 5px;
+	resize: none;
+	padding: 15px;
+	font-size: 17.5px;
+	box-shadow: rgba(29, 29, 29, 0.15) 0px 0px 9px 0px;
+	color: white;
 }
 
 .mainContent .buttons {
 	position: absolute;
-    width: calc(80vw - 30px);
+	width: calc(-30px + 80vw);
+	margin: -30px;
 }
 
 .buttons button {
-	box-shadow: 0px 0px 9px 0px #1d1d1d26;
-	background: #fbf8c4;
-    border-radius: 5px;
-    border: #c0d26e solid 1px;
-    padding: 15px;
-    cursor: pointer;
+	box-shadow: rgba(29, 29, 29, 0.15) 0px 0px 9px 0px;
+	background: #2d2d2d;
+	border-radius: 5px;
+	border: 1px solid #3d3d3d;
+	padding: 15px;
+	cursor: pointer;
+	color: white;
 }
 
-button:hover, textarea:hover {
+button:hover,
+textarea:hover {
 	box-shadow: none;
-	transition: all 0.25s ease;
+	transition: all 0.25s ease 0s;
 }
 
 .bigSpinButton {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    background: white;
-    margin-top: calc(50vh - 50px - 15px);
-    margin-left: calc(40vw - 50px - 15px);
-    box-sizing: border-box;
-    border-radius: 50%;
-    box-shadow: 0px 0px 9px 0px #1d1d1d26;
-    border: #484540 solid 2px;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	background: black;
+	margin-top: calc(-100px + 50vh);
+	margin-left: calc(-100px + 40vw);
+	box-sizing: border-box;
+	border-radius: 50%;
+	box-shadow: rgba(29, 29, 29, 0.15) 0px 0px 9px 0px;
+	border: 2px solid rgb(72, 69, 64);
+	color: white;
 }
 
 #spinWheelContainer {
@@ -77,25 +84,27 @@ button:hover, textarea:hover {
 }
 
 #chosenOneDialog div {
-	background: #fbf8c4;
+	background: #1d1d1d;
 	border-radius: 5px;
-	border: #c0d26e solid 1px;
+	border: 1px solid #2d2d2d;
 	padding: 15px;
 	animation-name: zoomIn;
 	animation-duration: 0.5s;
 	animation-fill-mode: both;
 	height: fit-content;
+	color: white;
 }
 
 @keyframes zoomIn {
 	0% {
 		opacity: 0;
-		transform: scale3d(.3, .3, .3);
+		transform: scale3d(0.3, 0.3, 0.3);
 	}
+
 	50% {
 		opacity: 1;
 	}
-} 
+}
 
 #confetti-canvas {
 	position: absolute;
@@ -105,20 +114,20 @@ button:hover, textarea:hover {
 	margin-top: 15px;
 	padding: 8px;
 	width: 100%;
-	background: #f2ffb4;
-    border: #c0d26e solid 1px;
-    border-radius: 5px;
+	background: #2d2d2d;
+	border: 1px solid #3d3d3d;
+	border-radius: 5px;
+	color: white;
 }
 
 #chosenOneDialog {
-    display: none;
-    position: absolute;
-    z-index: 9999999;
-    width: 100vw;
-    height: 100vh;
-    background: #1d1d1dab;
-    backdrop-filter: blur(10px);
-    place-items: center;
-    justify-content: center;
-    text-align: center;
+	display: none;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(29, 29, 29, 0.67);
+	backdrop-filter: blur(10px);
+	place-items: center;
+	justify-content: center;
+	text-align: center;
 }

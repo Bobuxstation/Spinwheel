@@ -1,13 +1,20 @@
-import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@4.2.0/dist/spin-wheel-esm.js';
+import { Wheel } from 'https://cdn.jsdelivr.net/npm/spin-wheel@4.2.0/dist/spin-wheel-esm.js';
 import * as easing from "./easing.js";
 
 //template and spawn spinwheel
 var props = {
-  itemBackgroundColors: ['#fbf8c4', '#e4f1aa', '#c0d26e', '#ff7d7d'],
+  itemBackgroundColors: ['#f44336', '#ff5722', '#ff9800', '#ffc107', '#ffeb3b', '#cddc39', '#8bc34a', '#4caf50', '#009688', '#00bcd4', '#03a9f4', '#2196f3', '#3f51b5', '#673ab7', '#9c27b0', '#e91e63'],
   overlayImage: 'spinwheelimage.svg',
   radius: 1,
   itemLabelFont: 'Rubik',
-  isInteractive: false,
+  itemLabelRadius: 0.92,
+  itemLabelRadiusMax: 0.37,
+  itemLabelRotation: 0,
+  itemLabelColors: ['#000'],
+  itemLabelBaselineOffset: -0.06,
+  lineWidth: 0,
+  borderWidth: 0,
+  isInteractive: true,
   items: []
 }
 
@@ -16,17 +23,19 @@ const wheel = new Wheel(container, props);
 
 //generate random names for template
 let newTextAreaString = ``
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 16; i++) {
   let name = faker.name.firstName();
+  let newLine = ``
+  if (i != 15) newLine = "\n";
 
-  newTextAreaString = newTextAreaString + name + "\n";
+  newTextAreaString = newTextAreaString + name + newLine;
   document.getElementById('names').value = newTextAreaString;
 
-  if (i == 9) refreshSpinWheel();
+  if (i == 15) refreshSpinWheel();
 }
 
 //Random picker and spin function
-function generateRandom(maxLimit = 100){
+function generateRandom(maxLimit = 100) {
   let rand = Math.random() * maxLimit;
   rand = Math.floor(rand);
 
@@ -40,11 +49,11 @@ function spinRandomly() {
   const duration = 4000;
   const easingmode = easing.cubicOut;
   wheel.spinToItem(chosen_one, duration, true, 2, 1, easingmode)
-  
+
   setTimeout(function () {
     if (Math.random() > 0.5) {
       wheel.spinToItem(real_chosen_one, 1000, true, 2, 1, easing.bounceOut)
-      setTimeout(function(){realSpin(real_chosen_one)}, 1500)
+      setTimeout(function () { realSpin(real_chosen_one) }, 1500)
     } else {
       realSpin(chosen_one)
     }
@@ -52,24 +61,26 @@ function spinRandomly() {
 }
 
 function realSpin(val) {
-    document.getElementById('chosenOneDialog').style.display = 'flex'
-    document.getElementById('chosenName').innerText = props.items[val].label;
-    startConfetti();
+  document.getElementById('chosenOneDialog').style.display = 'flex'
+  document.getElementById('chosenName').innerText = props.items[val].label;
+  startConfetti();
 
-    props.items.splice(val, 1);
-    let newTextAreaString = ``
+  props.items.splice(val, 1);
+  let newTextAreaString = ``
 
-    props.items.forEach(function (items) {
-      newTextAreaString = newTextAreaString + items.label + "\n";
-      document.getElementById('names').value = newTextAreaString;
+  props.items.forEach(function (items, i) {
+    let newLine = ``
+    if (i != props.items.length - 1) newLine = "\n";
 
-      wheel.init({...props,rotation: wheel.rotation});
-    })
+    newTextAreaString = newTextAreaString + items.label + newLine;
+    document.getElementById('names').value = newTextAreaString;
+
+    wheel.init({ ...props, rotation: wheel.rotation });
+  })
 }
 
 //Event listeners and add items to spinwheel based on textarea
 document.querySelector('.bigSpinButton').addEventListener('click', spinRandomly)
-document.getElementById('spinBtn').addEventListener('click', spinRandomly)
 document.getElementById('names').addEventListener('input', refreshSpinWheel)
 function refreshSpinWheel() {
   let value = document.getElementById('names').value;
@@ -95,7 +106,30 @@ function refreshSpinWheel() {
 
 //Import and export list
 document.getElementById('file-input').addEventListener('change', importList)
-document.getElementById('exportbtn').addEventListener('click', function() {saveList(document.getElementById('names').value)})
+document.getElementById('exportbtn').addEventListener('click', function () { saveList(document.getElementById('names').value) })
+
+//shuffle list
+document.getElementById('shufflebtn').addEventListener('click', function () {
+  let value = document.getElementById('names').value;
+  let lines = value.split("\n");
+  let shuffle = lines.sort(() => Math.random() - 0.5);
+
+  let blankString = ``
+  document.getElementById('names').value = ``
+
+  shuffle.forEach(function (items, i) {
+    if (items == '') return;
+
+    let newLine = ``
+    if (i != props.items.length - 1) newLine = "\n";
+
+    blankString = blankString + items + newLine;
+    document.getElementById('names').value = blankString;
+
+    wheel.init({ ...props, rotation: wheel.rotation });
+    refreshSpinWheel()
+  })
+})
 
 function importList() {
   var input = document.getElementById("file-input");
