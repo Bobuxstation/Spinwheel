@@ -45,17 +45,22 @@ function generateRandom(maxLimit = 100) {
 function spinRandomly() {
   let chosen_one = generateRandom(props.items.length)
   let real_chosen_one = generateRandom(props.items.length)
+  let doSurprise = document.getElementById("doSurprise").checked
 
   const duration = 4000;
   const easingmode = easing.cubicOut;
   wheel.spinToItem(chosen_one, duration, true, 2, 1, easingmode)
 
   setTimeout(function () {
-    if (Math.random() > 0.5) {
-      wheel.spinToItem(real_chosen_one, 1000, true, 2, 1, easingmode)
-      setTimeout(function () { realSpin(real_chosen_one) }, 1500)
-    } else {
+    if (!doSurprise) {
       realSpin(chosen_one)
+    } else {
+      if (Math.random() > 0.5) {
+        wheel.spinToItem(real_chosen_one, 1000, true, 2, 1, easingmode)
+        setTimeout(function () { realSpin(real_chosen_one) }, 1500)
+      } else {
+        realSpin(chosen_one)
+      }
     }
   }, 5000)
 }

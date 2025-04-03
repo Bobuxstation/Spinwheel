@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,32 +11,40 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
 </head>
+
 <body>
 
-<div class="sidebar">
-	<textarea id="names"></textarea>
-</div>
-
-<div class="mainContent">
-	<div class="buttons">
-		<button id="importbtn" onclick="document.getElementById('file-input').click()">Import</button>
-		<button id="exportbtn">Export</button>
-		<button id="shufflebtn">Shuffle</button>
+	<div class="sidebar">
+		<textarea id="names"></textarea>
 	</div>
 
-	<button class="bigSpinButton">Spin!</button>
-	<div id="spinWheelContainer"></div>
-</div>
+	<div class="mainContent">
+		<div class="buttons">
+			<button id="importbtn" onclick="document.getElementById('file-input').click()">Import</button>
+			<button id="exportbtn">Export</button>
+			<button id="shufflebtn">Shuffle</button>
+		</div>
 
-<div id="chosenOneDialog">
-	<div>
-		<h2 id="chosenName">undefined</h2>
-		We've got a winner!
-		<button onclick="stopConfetti(); this.parentNode.parentNode.style.display = 'none'" style="cursor: pointer;">Remove</button>
+		<div class="doSurpriseDiv">
+			<input type="checkbox" id="doSurprise" checked>
+			<label for="doSurprise">Do Surprise</label>
+		</div>
+
+		<button class="bigSpinButton">Spin!</button>
+		<div id="spinWheelContainer"></div>
 	</div>
-</div>
 
-<input type="file" accept=".txt" id="file-input" style="display: none;">
+	<div id="chosenOneDialog">
+		<div>
+			<h2 id="chosenName">undefined</h2>
+			We've got a winner!
+			<button onclick="stopConfetti(); this.parentNode.parentNode.style.display = 'none'"
+				style="cursor: pointer;">Remove</button>
+		</div>
+	</div>
+
+	<input type="file" accept=".txt" id="file-input" style="display: none;">
 
 </body>
+
 </html>
